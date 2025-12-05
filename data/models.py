@@ -58,5 +58,48 @@ class EquipoJugador(SQLModel, table=True):
     id_equipo_jugador: Optional[int] = Field(default=None, primary_key=True, index=True)
     id_jugador_FK: int = Field(foreign_key="jugador.id_jugador")
     id_equipo_FK: int = Field(foreign_key="equipo.id_equipo")
+    annio_ingreso: int
     jugadores: Optional["Jugador"] = Relationship(back_populates="jugadores")
     equipos: Optional["Equipo"] = Relationship(back_populates="equipos")
+
+class JugadorCreate(SQLModel):
+    nombre_completo: str
+    dorsal: int
+    fecha_nacimiento: date
+    nacionalidad: str
+    altura : float
+    peso : int
+    posicion: str
+    pie_dominate: str
+    valor_mercado: float
+
+class EstadisticaCreate(SQLModel):
+    minutos: int
+    goles: int
+    faltas: int
+    id_tarjeta_FK: int 
+    id_jugador_FK: int 
+    id_partido_FK: int 
+
+
+class PartidoCreate(SQLModel):
+    local: int = Field(foreign_key="Equipo.id_equipo")
+    visitante: int = Field(foreign_key="Equipo.id_equipo")
+    goles_local: int 
+    goles_visitante: int 
+    fecha: date
+
+
+class EquipoCreate(SQLModel):
+    nombre: str
+    anio_fundacion: int
+    ubicacion: str
+    estadio: str
+
+class EquipoJugadorCreate(SQLModel):
+    id_jugador_FK: int = Field(foreign_key="jugador.id_jugador")
+    id_equipo_FK: int = Field(foreign_key="equipo.id_equipo")
+    annio_ingreso: int
+
+class TarjetasCreate(SQLModel):
+    color: Color
