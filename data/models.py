@@ -3,7 +3,7 @@ from sqlmodel import SQLModel, Field, Relationship
 from typing import Optional, List
 from datetime import date, datetime
 
-class Jugador():
+class Jugador(SQLModel, table=True):
     id_jugador: Optional[int] = Field(default=None, primary_key=True, index=True)
     nombre_completo: str
     dorsal: int = Field(unique=True, index=True)
@@ -18,27 +18,34 @@ class Jugador():
     estadisticas : List["Estadistica"] = Relationship(back_populates="jugador")
     equipo : List["Equipo"] = Relationship(back_populates="jugador")
 
-class Estadistica():
+class Estadistica(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True, index=True)
-    id_jugador:  list["Jugador"] = Relationship(back_populates="Jugador")
-    id_partido:list["Partido"] = Relationship(back_populates="Partido")
     minutos: int
     goles: int
     faltas: int
     id_tarjetas:list["Tarjetas"] = Relationship(back_populates="Tarjetas")
+    id_jugador_FK: int = Field(foreign_key="jugador.id_jugador")
+    id_partido_FK: int = Field(foreign_key="partido.id_partido")
+    jugadores: Optional["Jugador"] = Relationship(back_populates="jugadores")
+    partidos: Optional["Partido"] = Relationship(back_populates="partidos")
 
-class Tarjetas():
+class Tarjetas(SQLModel, table=True):
     pass
 
 
-class Partido():
+class Partido(SQLModel, table=True):
+    id_partido: Optional[int] = Field(default=None, primary_key=True, index=True)
+
+
+
+class Equipo(SQLModel, table=True):
     pass
 
 
-
-class Equipo():
+class EquipoJugador(SQLModel, table=True):
     pass
 
-class Tarjetas():
+
+class Tarjetas(SQLModel, table=True):
     pass
 
