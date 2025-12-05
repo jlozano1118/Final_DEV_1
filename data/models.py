@@ -39,13 +39,13 @@ class Tarjetas(SQLModel, table=True):
 
 class Partido(SQLModel, table=True):
     id_partido: Optional[int] = Field(default=None, primary_key=True, index=True)
-    local: int = Field(foreign_key="Equipo.id_Equipo")
-    visitante: int = Field(foreign_key="Equipo.id_Equipo")
-    goles_local: int = Field(foreign_key="Estadistica.goles")
-    goles_visitante: int = Field(foreign_key="Estadistica.goles")
+    local: int = Field(foreign_key="Equipo.id_equipo")
+    visitante: int = Field(foreign_key="Equipo.id_equipo")
+    goles_local: int 
+    goles_visitante: int 
     fecha: date
-
-
+    equipolocal: Optional["Equipo"] = Relationship(back_populates="equipolocal")
+    equipovisitante: Optional["Equipo"] = Relationship(back_populates="equipovisitante")
 
 class Equipo(SQLModel, table=True):
     id_equipo: Optional[int] = Field(default=None, primary_key=True, index=True)
