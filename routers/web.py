@@ -28,5 +28,5 @@ templates = Jinja2Templates(directory="templates")
 async def pagina_jugadores(request: Request, session: Session = Depends(get_session)):
     activos = session.exec(select(Jugador).where(Jugador.estado == "ACTIVO" ).all()
     inactivos = session.exec(select(Jugador).where(Jugador.estado == "INACTIVO")).all()
-    return templates.TemplateResponse("usuarios.html", {"request": request, "jugadores_activos": activos,
+    return templates.TemplateResponse("jugadores.html", {"request": request, "jugadores_activos": activos,
                                                         "jugadores_inactivos": inactivos})
