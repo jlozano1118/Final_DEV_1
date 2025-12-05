@@ -23,11 +23,12 @@ class Estadistica(SQLModel, table=True):
     minutos: int
     goles: int
     faltas: int
-    id_tarjetas:list["Tarjetas"] = Relationship(back_populates="Tarjetas")
+    id_tarjeta_FK: int = Field(foreign_key="tarjetas.id_tarjeta")
     id_jugador_FK: int = Field(foreign_key="jugador.id_jugador")
     id_partido_FK: int = Field(foreign_key="partido.id_partido")
     jugadores: Optional["Jugador"] = Relationship(back_populates="jugadores")
     partidos: Optional["Partido"] = Relationship(back_populates="partidos")
+    tarjetas: Optional["Tarjeta"] = Relationship(back_populates="tarjetas")
 
 class Tarjetas(SQLModel, table=True):
     pass
@@ -47,5 +48,5 @@ class EquipoJugador(SQLModel, table=True):
 
 
 class Tarjetas(SQLModel, table=True):
-    pass
+    id_tarjeta: Optional[int] = Field(default=None, primary_key=True, index=True)
 
