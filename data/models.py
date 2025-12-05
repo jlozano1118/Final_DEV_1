@@ -28,7 +28,7 @@ class Estadistica(SQLModel, table=True):
     id_partido_FK: int = Field(foreign_key="partido.id_partido")
     jugadores: Optional["Jugador"] = Relationship(back_populates="jugadores")
     partidos: Optional["Partido"] = Relationship(back_populates="partidos")
-    tarjetas: Optional["Tarjeta"] = Relationship(back_populates="tarjetas")
+    tarjetas: Optional["Tarjetas"] = Relationship(back_populates="tarjetas")
 
 class Tarjetas(SQLModel, table=True):
 
@@ -42,7 +42,7 @@ class Partido(SQLModel, table=True):
     local: int = Field(foreign_key="Equipo.id_Equipo")
     visitante: int = Field(foreign_key="Equipo.id_Equipo")
     goles_local: int = Field(foreign_key="Estadistica.goles")
-    goles_local: int = Field(foreign_key="Estadistica.goles")
+    goles_visitante: int = Field(foreign_key="Estadistica.goles")
     fecha: date
 
 
