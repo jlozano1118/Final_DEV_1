@@ -14,7 +14,10 @@ class Jugador():
     peso : int
     posicion: str
     estado: str = Field(description="Estado", default= States.ACTIVO.value)
-    
+    pie_dominate: str
+    valor_mercado: float
+    estadisticas : List["Estadistica"] = Relationship(back_populates="jugador")
+    equipo : List["Equipo"] = Relationship(back_populates="jugador")
 
 class Estadistica():
     pass
@@ -24,4 +27,8 @@ class Partido():
     pass
 
 
+class Equipo():
+    pass
 
+class Tarjetas():
+    pass
