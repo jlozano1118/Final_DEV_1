@@ -1,6 +1,7 @@
 from fastapi import FastAPI
+from db import create_tables
 
-app = FastAPI(title="sigmotoa FC")
+app = FastAPI(lifespan=create_tables, title="sigmotoa FC")
 
 
 @app.get("/")
