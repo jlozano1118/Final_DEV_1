@@ -5,6 +5,8 @@ from fastapi.templating import Jinja2Templates
 from sqlmodel import Session, select
 from utils.db import crear_db, get_session
 from sqlalchemy import func, desc
+from routers import jugador, partido, equipo, tarjetas, estadistica
+
 
 app = FastAPI(
     title="Sigmotoa F.C API",
@@ -14,7 +16,7 @@ app = FastAPI(
 
 
 templates = Jinja2Templates(directory="templates")
-app.mount("/static", StaticFiles(directory="static"), name="static")
+
 @app.on_event("startup")
 def startup():
     crear_db()
@@ -28,3 +30,9 @@ async def root():
 @app.get("/hello/{name}")
 async def say_hello(name: str):
     return {"message": f"Bienvenido a sigmotoa FC {name}"}
+
+app.include_router(jugador.router)
+app.include_router(equipo.router)
+app.include_router(estadistica.router)
+app.include_router(partido.router)
+app.include_router(tarjetas.router)
