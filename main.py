@@ -6,7 +6,7 @@ from sqlmodel import Session, select
 from utils.db import crear_db, get_session
 from sqlalchemy import func, desc
 from routers import jugador, partido, equipo, tarjetas, estadistica
-
+from data.models import Jugador, Equipo, Estadistica, Partido, Tarjetas, EquipoJugador
 
 app = FastAPI(
     title="Sigmotoa F.C API",
