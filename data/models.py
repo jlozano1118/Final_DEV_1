@@ -2,7 +2,7 @@
 from sqlmodel import SQLModel, Field, Relationship
 from typing import Optional, List
 from datetime import date, datetime
-
+from utils.states import States
 class Jugador(SQLModel, table=True):
     id_jugador: Optional[int] = Field(default=None, primary_key=True, index=True)
     nombre_completo: str
