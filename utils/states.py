@@ -5,3 +5,7 @@ class States(Enum):
     INACTIVO = "INACTIVO"
     LESIONADO= "LESIONADO"
     AMONESTADO= "AMONESTADO"
+
+class Color(Enum):
+    AMARILLA = "AMARILLA"
+    ROJO = "ROJO"
