@@ -31,7 +31,7 @@ class Estadistica(SQLModel, table=True):
     tarjetas: Optional["Tarjeta"] = Relationship(back_populates="tarjetas")
 
 class Tarjetas(SQLModel, table=True):
-    pass
+    id_tarjeta: Optional[int] = Field(default=None, primary_key=True, index=True)
 
 
 class Partido(SQLModel, table=True):
@@ -45,7 +45,7 @@ class Equipo(SQLModel, table=True):
     anio_fundacion: int
     ubicacion: str
     estadio: str
-    
+
 class EquipoJugador(SQLModel, table=True):
     id_equipo_jugador: Optional[int] = Field(default=None, primary_key=True, index=True)
     id_jugador_FK: int = Field(foreign_key="jugador.id_jugador")
