@@ -97,8 +97,8 @@ class EquipoCreate(SQLModel):
     estadio: str
 
 class EquipoJugadorCreate(SQLModel):
-    id_jugador_FK: int = Field(foreign_key="jugador.id_jugador")
-    id_equipo_FK: int = Field(foreign_key="equipo.id_equipo")
+    id_jugador_FK: int 
+    id_equipo_FK: int 
     annio_ingreso: int
 
 class TarjetasCreate(SQLModel):
