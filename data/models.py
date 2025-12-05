@@ -1,6 +1,10 @@
+
+from sqlmodel import SQLModel, Field, Relationship
+from typing import Optional, List
+from datetime import date, datetime
+
 class Jugador():
     pass
-#Ok ya estan organizadas las carpetas
 
 class Estadistica():
     pass
