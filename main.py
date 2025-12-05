@@ -4,11 +4,20 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqlmodel import Session, select
 from utils.db import crear_db, get_session
-from data.models import Usuario, PeliculaSerie, Valoracion, Rutina
-from routers import usuario, peliculaSerie, valoracion, rutina, web
-import images
 from sqlalchemy import func, desc
-app = FastAPI(lifespan=create_tables, title="sigmotoa FC")
+
+app = FastAPI(
+    title="Sigmotoa F.C API",
+    description="Sistema de Gestión de Películas",
+    version="1.0.0"
+)
+
+
+templates = Jinja2Templates(directory="templates")
+
+@app.on_event("startup")
+def startup():
+    crear_db()
 
 
 @app.get("/")
