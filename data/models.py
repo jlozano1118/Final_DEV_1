@@ -2,7 +2,7 @@
 from sqlmodel import SQLModel, Field, Relationship
 from typing import Optional, List
 from datetime import date, datetime
-from utils.states import States
+from utils.states import States, Color
 class Jugador(SQLModel, table=True):
     id_jugador: Optional[int] = Field(default=None, primary_key=True, index=True)
     nombre_completo: str
@@ -31,11 +31,19 @@ class Estadistica(SQLModel, table=True):
     tarjetas: Optional["Tarjeta"] = Relationship(back_populates="tarjetas")
 
 class Tarjetas(SQLModel, table=True):
-    id_tarjeta: Optional[int] = Field(default=None, primary_key=True, index=True)
+
+    id_tarjetas: Optional[int] = Field(default=None, primary_key=True, index=True)
+    color: Color
+
 
 
 class Partido(SQLModel, table=True):
     id_partido: Optional[int] = Field(default=None, primary_key=True, index=True)
+    local: int = Field(foreign_key="Equipo.id_Equipo")
+    visitante: int = Field(foreign_key="Equipo.id_Equipo")
+    goles_local: int = Field(foreign_key="Estadistica.goles")
+    goles_local: int = Field(foreign_key="Estadistica.goles")
+    fecha: date
 
 
 
@@ -52,6 +60,3 @@ class EquipoJugador(SQLModel, table=True):
     id_equipo_FK: int = Field(foreign_key="equipo.id_equipo")
     jugadores: Optional["Jugador"] = Relationship(back_populates="jugadores")
     equipos: Optional["Equipo"] = Relationship(back_populates="equipos")
-class Tarjetas(SQLModel, table=True):
-    id_tarjeta: Optional[int] = Field(default=None, primary_key=True, index=True)
-
