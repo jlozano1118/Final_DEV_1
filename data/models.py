@@ -40,13 +40,18 @@ class Partido(SQLModel, table=True):
 
 
 class Equipo(SQLModel, table=True):
-    pass
-
-
+    id_equipo: Optional[int] = Field(default=None, primary_key=True, index=True)
+    nombre: str
+    anio_fundacion: int
+    ubicacion: str
+    estadio: str
+    
 class EquipoJugador(SQLModel, table=True):
-    pass
-
-
+    id_equipo_jugador: Optional[int] = Field(default=None, primary_key=True, index=True)
+    id_jugador_FK: int = Field(foreign_key="jugador.id_jugador")
+    id_equipo_FK: int = Field(foreign_key="equipo.id_equipo")
+    jugadores: Optional["Jugador"] = Relationship(back_populates="jugadores")
+    equipos: Optional["Equipo"] = Relationship(back_populates="equipos")
 class Tarjetas(SQLModel, table=True):
     id_tarjeta: Optional[int] = Field(default=None, primary_key=True, index=True)
 
